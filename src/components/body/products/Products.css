@@ -1,0 +1,18 @@
+.card-relative {
+    position: relative;
+}
+
+.product-fav {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    padding-top: 2px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 2px black;
+}
