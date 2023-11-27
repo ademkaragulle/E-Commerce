@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { increment, incrementByAmount } from '../../store/slices/ProductSlice'
 
 
 
 function Basket() {
     const [totalBasket, setTotalBasket] = useState(0)
-    const count = useSelector((state) => state.productDatas.value)
-    const dispatch = useDispatch()
 
-    console.log(count)
 
 
     const inBasket = [
@@ -34,18 +29,18 @@ function Basket() {
 
 
 
+
     const calculateTotalPrice = () => {
         let price = 0
         inBasket.forEach((item) => price += item.productPrice)
         return price
     }
 
+
+
     useEffect(() => {
         setTotalBasket(calculateTotalPrice)
     }, [])
-
-
-
 
 
     return (
@@ -81,7 +76,7 @@ function Basket() {
                             </div>
                         </div>
                         <div className="col-6 px-2 ">
-                            <div onClick={()=>dispatch(increment())} className="text-white btn btn-warning btn border form-control">
+                            <div className="text-white btn btn-warning btn border form-control">
                                 Checkout
                             </div>
                         </div>
