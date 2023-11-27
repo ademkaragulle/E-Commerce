@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import ProductsDataReducer from './slices/ProductSlice'
+import { getProductReducer } from './slices/ProductSlice'
+import { getcategoryReducer } from './slices/CategorySlice'
+import { CurrentCategoryReducer } from './slices/CurrentCategorySlice'
 
-export default configureStore({
+export const store = configureStore({
     reducer: {
-        productDatas: ProductsDataReducer
+        product: getProductReducer,
+        category: getcategoryReducer,
+        currenCategory: CurrentCategoryReducer,
     }
 })
