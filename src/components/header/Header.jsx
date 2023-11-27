@@ -1,13 +1,28 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import logo from '../../assets/logo.png'
 import './Header.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { getcategory } from '../store/slices/CategorySlice'
+import { changeCurrentCategory } from '../store/slices/CurrentCategorySlice'
 
 function Header() {
-    fetch('https://fakestoreapi.com/products/category/jewelery')
-        .then(res => res.json())
-        .then(json => console.log(json))
 
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getcategory())
+    }, [dispatch])
+
+    const { data, loading, error } = useSelector((store) => {
+        return {
+            data: store.category.data,
+            loading: store.category.loading,
+            error: store.category.error,
+        }
+    })
+
+
+
+    console.log(data)
 
     return (
         <div id='header'>
@@ -17,10 +32,9 @@ function Header() {
                         <img className='h-100' src={logo} alt="" />
                     </div>
                     <div className="col-6 d-flex gap-4 justify-content-end align-items-center">
-                        <Link to="adem">Adem</Link>
-                        <Link to="adem">Adem</Link>
-                        <Link to="adem">Adem</Link>
-                        <Link to="adem">Adem</Link>
+                        {data && data.map((item, index) => (
+                            <div className='btn' onClick={() => (changeCurrentCategory(item.id))} key={index}>{item.name}</div>
+                        ))}
                     </div>
                 </div>
             </div>
