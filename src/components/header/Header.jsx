@@ -19,10 +19,9 @@ function Header() {
             error: store.category.error,
         }
     })
+console.log(data)
 
 
-
-    console.log(data)
 
     return (
         <div id='header'>

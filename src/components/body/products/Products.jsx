@@ -13,7 +13,6 @@ function Products() {
             error: store.product.error,
         }
     })
-    console.log(currentcategory)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getProduct(currentcategory))
