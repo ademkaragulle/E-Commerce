@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import './Products.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProduct } from '../../store/slices/ProductSlice'
+import { useParams, useSearchParams } from 'react-router-dom';
 
 function Products() {
+    const [category, setfirst] = useSearchParams("")
+    const categoryId = category.get('categoryId')
 
-    const { data, loading, error, currentcategory } = useSelector((store) => {
+    const { data } = useSelector((store) => {
         return {
-            currentPage: store.currenCategory.currentcategory,
             data: store.product.data,
             loading: store.product.loading,
             error: store.product.error,
@@ -15,8 +17,8 @@ function Products() {
     })
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(getProduct(currentcategory))
-    }, [dispatch, currentcategory])
+        dispatch(getProduct(categoryId))
+    }, [dispatch, category])
 
 
     return (

@@ -1,27 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../../assets/logo.png'
 import './Header.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getcategory } from '../store/slices/CategorySlice'
-import { changeCurrentCategory } from '../store/slices/CurrentCategorySlice'
+import { useSearchParams } from 'react-router-dom'
 
 function Header() {
+    const [searchParams, setSearchParams] = useSearchParams("")
+
 
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getcategory())
     }, [dispatch])
 
-    const { data, loading, error } = useSelector((store) => {
+    const { data } = useSelector((store) => {
         return {
             data: store.category.data,
             loading: store.category.loading,
             error: store.category.error,
         }
     })
-console.log(data)
-
-
 
     return (
         <div id='header'>
@@ -32,12 +31,12 @@ console.log(data)
                     </div>
                     <div className="col-6 d-flex gap-4 justify-content-end align-items-center">
                         {data && data.map((item, index) => (
-                            <div className='btn' onClick={() => (changeCurrentCategory(item.id))} key={index}>{item.name}</div>
+                            index < 6 && <div onClick={() => setSearchParams({ categoryId: item.id })} className='btn' key={index}>{item.name}</div>
                         ))}
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
