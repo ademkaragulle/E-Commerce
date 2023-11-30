@@ -4,9 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 const url = 'https://api.escuelajs.co/api/v1/products/'
 export const getProduct = createAsyncThunk("getProduct", async (categoryId = "sad") => {
-    console.log(categoryId)
     const categoryUrl = url + (categoryId ? "?categoryId=" + categoryId : "")
-    console.log(categoryUrl)
     const response = await fetch(categoryUrl);
     const Product = await response.json();
     return Product

@@ -17,8 +17,7 @@ function Header() {
     const { data } = useSelector((store) => {
         return {
             data: store.category.data,
-            loading: store.category.loading,
-            error: store.category.error,
+
         }
     })
 
@@ -30,6 +29,7 @@ function Header() {
                         <img className='h-100' src={logo} alt="" />
                     </div>
                     <div className="col-6 d-flex gap-4 justify-content-end align-items-center">
+                        <div onClick={() => setSearchParams()} className='btn'>All Category</div>
                         {data && data.map((item, index) => (
                             index < 6 && <div onClick={() => setSearchParams({ categoryId: item.id })} className='btn' key={index}>{item.name}</div>
                         ))}
